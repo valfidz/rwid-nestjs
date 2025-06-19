@@ -7,6 +7,6 @@ import { dot } from 'node:test/reporters';
 async function bootstrap() {
   const config = await loadConfig(AppConfig, dotEnvLoader());
   const app = await NestFactory.create(AppModule);
-  await app.listen(config.port);
+  await app.listen(config.PORT);
 }
 bootstrap();

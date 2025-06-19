@@ -7,6 +7,6 @@ export class AppService {
   constructor(private readonly config: AppConfig) {}
 
   getHello(): string {
-    return 'Hello World! We are using port: ' + this.config.port + ' and text: ' + this.config.text;
+    return 'Hello World! We are using port: ' + this.config.PORT + ' and text: ' + this.config.TEXT;
   }
 }
