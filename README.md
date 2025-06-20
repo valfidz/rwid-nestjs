@@ -1,33 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# RWID NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![License](https://badgen.net/github/license/valfidz/rwid-nestjs 'License')](LICENSE.md)
+[![Release](https://badgen.net/github/release/valfidz/rwid-nestjs 'Release')](https://github.com/valfidz/rwid-nestjs/releases)
+[![Test Status](https://github.com/valfidz/rwid-nestjs/actions/workflows/main.yml/badge.svg 'Test Status')](https://github.com/valfidz/rwid-nestjs/actions/workflows/main.yml)
+[![Coverage Status](https://codecov.io/gh/valfidz/rwid-nestjs/graph/badge.svg?token=6TZK7PQBR5 'Coverage Status')](https://codecov.io/gh/valfidz/rwid-nestjs)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of contents
+
+- [RWID NestJS](#rwid-nestjs)
+  - [Table of contents](#table-of-contents)
+  - [Description](#description)
+  - [Requirements](#requirements)
+  - [Project setup](#project-setup)
+  - [Compile and run the project](#compile-and-run-the-project)
+  - [Database](#database)
+    - [Initial setup](#initial-setup)
+    - [Migrations](#migrations)
+  - [Run tests](#run-tests)
+  - [Stay in touch](#stay-in-touch)
+  - [API documentation](#api-documentation)
+  - [Changelog](#changelog)
+  - [License](#license)
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Learn [NestJS](https://nestjs.com) from basic.
+
+## Requirements
+
+- [![Node.js](https://img.shields.io/badge/Node.js%20^22.14.0-43853D?logo=node.js&logoColor=white 'Node.js')](https://nodejs.org)
+- [![pnpm](https://img.shields.io/badge/pnpm%20^10.9.0-F69220?logo=pnpm&logoColor=white 'pnpm')](https://pnpm.io)
+- [![PostgreSQL](https://img.shields.io/badge/PostgreSQL%2017.5-316192?logo=postgresql&logoColor=white 'PostgreSQL')](https://www.postgresql.org)
 
 ## Project setup
 
 ```bash
+$ cp .env.example .env # Copy .env.example to .env
 $ pnpm install
 ```
 
@@ -41,7 +49,48 @@ $ pnpm run start
 $ pnpm run start:dev
 
 # production mode
+$ pnpm run build # Build the project (skip this if `/dist` folder is already exists)
 $ pnpm run start:prod
+```
+
+Open your browser and navigate to [localhost:3000](http://localhost:3000).
+
+## Database
+
+### Initial setup
+
+```bash
+# create database and run migrations
+$ pnpm exec prisma migrate dev
+
+# run seed
+$ pnpm exec prisma db seed
+```
+
+Make sure you have the PostgreSQL environment and already setup these .env configurations below before running the commands above.
+
+```properties
+DB_URL=postgresql://root:password@localhost:5432/rwid_nestjs?schema=public
+```
+
+This project is using [Prisma](https://prisma.io) as the database tool. Please read their documentation for more information.
+
+### Migrations
+
+Run this command below to generate a new migration file.
+
+```bash
+$ pnpm run migration:dev
+```
+
+All migrations are stored in `prisma/migrations` directory. The migrations directory has the following structure:
+
+```bash
+prisma/
+    └── migrations/
+        └── 20250526155757_0_2_0
+            └── migration.sql
+        └── migration_lock.toml
 ```
 
 ## Run tests
@@ -57,42 +106,23 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Naufal Hafizh Nugraha](https://linkedin.com/in/nhafizh)
+- Website - [https://valcode.vercel.app](https://valcode.vercel.app)
+
+## API documentation
+
+You can access the API documentation here:
+
+- Development - TBD.
+- Staging - TBD.
+- Production - TBD.
+
+## Changelog
+
+You can read the changelog [here](CHANGELOG.md).
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+You can read the license [here](LICENSE.md).

@@ -1,10 +1,38 @@
 {
-  "name": "nestjs-practice",
+  "name": "@valfidz/rwid-nestjs",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Learn NestJS from basic",
+  "author": {
+    "name": "Naufal Hafizh Nugraha",
+    "url": "https://valcode.vercel.app",
+    "email": "nugrahanaufalhafizh@gmail.com"
+  },
   "private": true,
-  "license": "UNLICENSED",
+  "engineStrict": true,
+  "engines": {
+    "node": "22.x",
+    "pnpm": "10.x"
+  },
+  "volta": {
+    "node": "22.14.0"
+  },
+  "packageManager": "pnpm@10.9.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valfidz/rwid-nestjs.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "NestJS",
+    "Backend",
+    "Learning",
+    "RWID"
+  ],
+  "bugs": {
+    "url": "https://github.com/valfidz/rwid-nestjs/issues"
+  },
+  "homepage": "https://github.com/valfidz/rwid-nestjs#readme",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
